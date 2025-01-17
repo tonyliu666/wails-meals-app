@@ -23,5 +23,7 @@ func (a *App) startup(ctx context.Context) {
 
 // Greet returns a greeting for the given name
 func (a *App) GetRecommendation(name string) string {
-	
+
+	return fmt.Sprintf("Hello %s, It's show time!", name)
+
 }
