@@ -1,0 +1,40 @@
+export namespace main {
+	
+	export class Place {
+	    name: string;
+	    // Go type: struct { Lat float64 "json:\"lat\""; Lng float64 "json:\"lng\"" }
+	    location: any;
+	    rating: number;
+	
+	    static createFrom(source: any = {}) {
+	        return new Place(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.name = source["name"];
+	        this.location = this.convertValues(source["location"], Object);
+	        this.rating = source["rating"];
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
+
+}
+

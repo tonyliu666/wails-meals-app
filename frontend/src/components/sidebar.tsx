@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import "../Sidebar.css"; // Import your styles
 
 interface SidebarProps {
-  setShowMap: (value: boolean) => void;
+
   setShowBreakfast: () => void;
   setShowLunch: () => void;
   setShowDinner: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ setShowMap, setShowBreakfast, setShowLunch, setShowDinner }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setShowBreakfast, setShowLunch, setShowDinner }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const menuItems = [
