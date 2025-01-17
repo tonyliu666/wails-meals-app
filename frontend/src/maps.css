@@ -1,0 +1,23 @@
+/* 
+for maps:  */
+
+.info-window {
+    max-width: 400px;
+  }
+  
+  .info-window h1 {
+    color: red;
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .info-window p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .info-window a {
+    color: blue;
+    text-decoration: none;
+  }
+  
