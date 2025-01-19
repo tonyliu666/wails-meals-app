@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Sidebar.css"; // Import your styles
+import "./Sidebar.css"; // Import your styles
 
 interface SidebarProps {
 
