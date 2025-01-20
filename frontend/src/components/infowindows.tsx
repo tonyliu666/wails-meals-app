@@ -1,32 +1,44 @@
 'use client';
-import React from 'react';
-import { InfoWindow } from '@vis.gl/react-google-maps';
-import './maps.css'; // Import the CSS file
+import React, { useState } from 'react';
+import { Marker, InfoWindow } from '@vis.gl/react-google-maps';
+import './maps.css';
 
 interface MarkerWithInfowindowProps {
   position: { lat: number; lng: number };
-  infoContent: string;
+  name: string;
+  rating: number;
+  icon: string; 
 }
 
-export const MarkerWithInfowindow: React.FC<MarkerWithInfowindowProps> = ({ position, infoContent }) => {
+export const MarkerWithInfowindow: React.FC<MarkerWithInfowindowProps> = ({ position, name, rating, icon }) => {
+  const [isOpen, setIsOpen] = useState(false); // State to manage InfoWindow visibility
+
   return (
-    <InfoWindow position={position} maxWidth={400}>
-      <div className="info-window">
-        <h1>{infoContent}</h1>
-        <p>
-          This is a custom info window for <strong>{infoContent}</strong>. You can customize this content further.
-        </p>
-        <p>
-          <strong>Attribution:</strong>{' '}
-          <a
-            href="https://example.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn More
-          </a>
-        </p>
-      </div>
-    </InfoWindow>
+    <>
+      <Marker
+        position={position}
+        onClick={() => setIsOpen(true)} // Show InfoWindow on marker click
+        options={{
+          icon: {
+            url: icon, // Path to the icon
+            scaledSize: new google.maps.Size(32, 32), // Resize the icon (width x height in pixels)
+          },
+        }}
+      />
+      {isOpen && (
+        <InfoWindow
+          position={position}
+          onCloseClick={() => setIsOpen(false)} // Hide InfoWindow on close click
+        >
+          <div className="info-window">
+            <h2 className="info-title">{name}</h2>
+            <p className="info-description">
+              Rating: <strong>{rating}</strong>
+            </p>
+            <button onClick={() => setIsOpen(false)}>Close</button>
+          </div>
+        </InfoWindow>
+      )}
+    </>
   );
 };

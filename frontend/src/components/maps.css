@@ -1,23 +1,26 @@
-/* 
-for maps:  */
-
 .info-window {
-    max-width: 400px;
-  }
-  
-  .info-window h1 {
-    color: red;
-    font-size: 20px;
-    margin: 0;
-  }
-  
-  .info-window p {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  .info-window a {
-    color: blue;
-    text-decoration: none;
-  }
-  
+  max-width: 150px; /* Adjust the width of the info window */
+  font-size: 12px; /* Shrink text size */
+  padding: 8px; /* Add padding for better spacing */
+}
+
+.info-window h2 {
+  font-size: 16px; /* Smaller title size */
+  margin: 0;
+  color: red; /* Optional: Change color for better visibility */
+}
+
+.info-window p {
+  font-size: 10px; /* Smaller paragraph size */
+  line-height: 1.2; /* Adjust line height */
+  color: green; 
+}
+
+.info-window strong {
+  font-weight: bold;
+}
+
+.info-window a {
+  color: blue;
+  text-decoration: none;
+}

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { APIProvider, Map, MapCameraChangedEvent } from "@vis.gl/react-google-maps";
+import { APIProvider, Map} from "@vis.gl/react-google-maps";
 import Sidebar from "./components/sidebar";
 import { MarkerWithInfowindow } from "./components/infowindows";
 import Breakfast from "./components/breakfast";
 import { GetRecommendation } from "../wailsjs/go/main/App";
+import breakfasticon from "./assets/images/breakfast.png";
 
 const App = () => {
   const [activeMenu, setActiveMenu] = useState<"breakfast" | "lunch" | "dinner" | null>(null);
@@ -46,19 +47,14 @@ const App = () => {
               apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
               libraries={["marker", "places"]}
             >
-              <Map
-                key={changespots} // Force re-render on changespots change
-                defaultZoom={25}
-                defaultCenter={{ lat: 24.7864938, lng: 121.0188275 }}
-                onCameraChanged={(ev: MapCameraChangedEvent) =>
-                  console.log("camera changed:", ev.detail.center, "zoom:", ev.detail.zoom)
-                }
-              >
+              <Map defaultZoom={12} defaultCenter={{ lat: 24.7864938, lng: 121.0188275 }}>
                 {spots.map((spot, index) => (
                   <MarkerWithInfowindow
                     key={index}
-                    position={{ lat: spot.location.lat, lng: spot.location.lng }}
-                    infoContent={spot.name}
+                    position={spot.location}
+                    name={spot.name}
+                    rating={spot.rating}
+                    icon={breakfasticon}
                   />
                 ))}
               </Map>
