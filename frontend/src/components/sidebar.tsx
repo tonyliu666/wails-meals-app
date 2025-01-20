@@ -6,9 +6,12 @@ interface SidebarProps {
   setShowBreakfast: () => void;
   setShowLunch: () => void;
   setShowDinner: () => void;
+  setShowEatenBreakfast: () => void;
+  setShowEatenLunch: () => void;
+  setShowEatenDinner: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ setShowBreakfast, setShowLunch, setShowDinner }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setShowBreakfast, setShowLunch, setShowDinner, setShowEatenBreakfast,setShowEatenLunch, setShowEatenDinner}) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const menuItems = [
@@ -20,7 +23,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowBreakfast, setShowLunch, setSh
         { name: "Dinner", action: setShowDinner },
       ],
     },
-    { name: "Profile", options: [] },
+    { name: "Profile", options: [
+        { name: "Breakfast You Ate", action: setShowEatenBreakfast },
+        { name: "Lunch You Ate", action: setShowEatenLunch },
+        { name: "Dinner You Ate", action: setShowEatenDinner },
+    ] },
     { name: "Settings", options: [] },
   ];
 
@@ -30,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowBreakfast, setShowLunch, setSh
 
   return (
     <div className="sidebar">
-      <div className="logo">My App</div>
+      <div className="logo">RecordYourMeals</div>
       {menuItems.map((item, index) => (
         <div key={index} className="sidebar-item">
           <button className="sidebar-button" onClick={() => handleMenuClick(item.name)}>

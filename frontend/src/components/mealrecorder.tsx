@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-interface BreakfastProps {
-  onSubmit: (place: string, days: number) => void;
+interface EatenMealsProps {
+    onSubmit: (days: number, eatenMeals: string) => void;
+    eatenMeals : string;
 }
 
-const Breakfast: React.FC<BreakfastProps> = ({ onSubmit }) => {
-  const [place, setPlace] = useState("");
+const MealsRecorder: React.FC<EatenMealsProps> = ({ onSubmit, eatenMeals }) => {
+
   const [days, setDays] = useState("");
 
   const handleDaysChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,29 +18,28 @@ const Breakfast: React.FC<BreakfastProps> = ({ onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    if (place.trim() === "" || days.trim() === "" || parseInt(days) <= 0) {
-      alert("Please enter a valid place and a positive number of days.");
-      return;
-    }
-
-    onSubmit(place, parseInt(days)); // Pass data back to parent
+    onSubmit(parseInt(days),eatenMeals); // Pass data back to parent
   };
 
   return (
-    <div style={{ padding: "20px", border: "1px solid #ddd", borderRadius: "5px", width: "300px" }}>
-      <h2>Breakfast Planner</h2>
-      <div style={{ marginBottom: "10px" }}>
-        <label>
-          Place:
-          <input
-            type="text"
-            value={place}
-            onChange={(e) => setPlace(e.target.value)}
-            placeholder="Enter place, eg: HsinChuBigCity"
-            style={{ marginLeft: "10px", padding: "5px", width: "200px" }}
-          />
-        </label>
-      </div>
+    <div
+      style={{
+        position: "absolute", // Center the component in the container
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "20px",
+        border: "1px solid #ddd",
+        borderRadius: "5px",
+        width: "300px",
+        backgroundColor: "#fff", // Add a white background
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add a subtle shadow
+        textAlign: "center", // Center-align text
+        color: "#333", // Set default text color
+      }}
+    >
+      <h2>Meal Recorder</h2>
+      
       <div style={{ marginBottom: "10px" }}>
         <label>
           Days:
@@ -69,4 +69,4 @@ const Breakfast: React.FC<BreakfastProps> = ({ onSubmit }) => {
   );
 };
 
-export default Breakfast;
+export default MealsRecorder;
